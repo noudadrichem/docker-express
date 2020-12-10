@@ -1,0 +1,25 @@
+name: Publish to Docker registry
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    # branches:
+    #   - master
+    tags:
+      - v*
+
+env:
+  # TODO: Change variable to your image's name.
+  IMAGE_NAME: docker_express
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Docker Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: noudadrichem/docker-express
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
