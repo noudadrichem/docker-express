@@ -30,4 +30,5 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_PASS }}
-          script: sudo -i && cd ${{ secrets.PATH }} && sudo docker pull noudadrichem/docker-express:latest && sudo docker-compose up -d
+          script: cd docker-express && echo '${{ secrets.HOST_PASS }}' | sudo -S docker pull noudadrichem/docker-express:latest && sudo docker-compose up -d
+

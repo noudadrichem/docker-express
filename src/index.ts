@@ -3,9 +3,9 @@ import express from 'express'
 const app = express()
 const port = process.env.PORT || 5000
 app.get('/', (_, res) => {
-  console.log('GET NEW NEW / ')
+  console.log('GET / ')
   res.status(200).json({
-    message: 'This is a new new version...'
+    message: 'Now with suuuuuutt'
   })
 })
 app.listen(port, () => console.log(`Running on port ${port}`))
