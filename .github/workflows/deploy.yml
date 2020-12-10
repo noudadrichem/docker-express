@@ -8,12 +8,8 @@ on:
     tags:
       - v*
 
-env:
-  # TODO: Change variable to your image's name.
-  IMAGE_NAME: docker_express
-
 jobs:
-  build:
+  push:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -23,3 +19,16 @@ jobs:
         name: noudadrichem/docker-express
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Push to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.HOST_USERNAME }}
+          password: ${{ secrets.HOST_PASS }}
+          script: sudo -i && cd ${{ secrets.PATH }} && docker-compose up -d
