@@ -21,7 +21,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
   deploy:
-    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -31,4 +30,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_PASS }}
-          script: sudo -i && cd ${{ secrets.PATH }} && docker-compose up -d
+          script: sudo -i && cd ${{ secrets.PATH }} && sudo docker pull noudadrichem/docker-express:latest && sudo docker-compose up -d
