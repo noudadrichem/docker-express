@@ -27,8 +27,6 @@ jobs:
     needs: [push]
     runs-on: ubuntu-latest
     steps:
-      - name: Set tag in env...
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - uses: actions/checkout@v1
       - name: Push to server...
         uses: appleboy/ssh-action@master
@@ -36,5 +34,5 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_PASS }}
-          script: cd docker-express && echo '${{ secrets.HOST_PASS }}' | sudo -S docker pull noudadrichem/docker-express:${{ env.RELEASE_VERSION }} && echo '${{ secrets.HOST_PASS }}' | sudo -S docker-compose up -d
+          script: cd docker-express && echo '${{ secrets.HOST_PASS }}' | sudo -S docker pull noudadrichem/docker-express:latest && echo '${{ secrets.HOST_PASS }}' | sudo -S docker-compose up -d
 
