@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Publish to Docker Registry
+    - name: Publish to Docker Registry...
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: noudadrichem/docker-express
@@ -25,12 +25,19 @@ jobs:
     needs: [push]
     runs-on: ubuntu-latest
     steps:
+      - name: Set tag in env...
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Test if tag as ENV is there...
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
+
       - uses: actions/checkout@v1
-      - name: Push to server
+      - name: Push to server...
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           password: ${{ secrets.HOST_PASS }}
-          script: cd docker-express && echo '${{ secrets.HOST_PASS }}' | sudo -S docker pull noudadrichem/docker-express:latest && echo '${{ secrets.HOST_PASS }}' | sudo -S docker-compose up -d
+          script: cd docker-express && echo '${{ secrets.HOST_PASS }}' | sudo -S docker pull noudadrichem/docker-express:${{ env.RELEASE_VERSION }} && echo '${{ secrets.HOST_PASS }}' | sudo -S docker-compose up -d
 
