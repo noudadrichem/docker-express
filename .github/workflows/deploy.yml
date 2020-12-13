@@ -19,6 +19,7 @@ jobs:
         name: noudadrichem/docker-express
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        tag_semver: true
 
   deploy:
     needs: [push]
