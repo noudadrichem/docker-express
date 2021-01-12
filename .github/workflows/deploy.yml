@@ -13,9 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Test
+    - name: Install
       run: npm install
+    - name: Test
       run: npm test
+    - name: Build
       run: npm build
   push:
     runs-on: ubuntu-latest
