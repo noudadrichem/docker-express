@@ -3,12 +3,18 @@ name: Publish to Docker registry
 on:
   push:
     # Publish `master` as Docker `latest` image.
-    # branches:
-    #   - master
+    branches:
+      - master
     tags:
       - v*
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Test
+      run: npm test
   push:
     runs-on: ubuntu-latest
     steps:
