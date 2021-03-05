@@ -27,7 +27,7 @@ spec:
             memory: 250Mi
             cpu: 150m
         ports:
-        - containerPort: 3600
+        - containerPort: 5000
         env:
         - name: NODE_ENV
           valueFrom:
