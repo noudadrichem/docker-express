@@ -8,13 +8,8 @@ spec:
       app: barfoo
       tier: frontend
       product: training
-  replicas: 1
+  replicas: 2
   template:
-    metadata:
-      labels:
-        app: barfoo
-        tier: frontend
-        product: training
     spec:
       containers:
       - name: docker-express
@@ -35,5 +30,3 @@ spec:
               name: testing
               key: NODE_ENV
       restartPolicy: Always
-      imagePullSecrets:
-        - name: regcred
