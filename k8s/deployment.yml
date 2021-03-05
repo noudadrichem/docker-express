@@ -17,7 +17,7 @@ spec:
         product: training
     spec:
       containers:
-      - name: barfoo
+      - name: docker-express
         image: noudadrichem/docker-express
         resources:
           requests:
@@ -32,7 +32,7 @@ spec:
         - name: NODE_ENV
           valueFrom:
             configMapKeyRef:
-              name: testing-config
+              name: testing
               key: NODE_ENV
       restartPolicy: Always
       imagePullSecrets:
