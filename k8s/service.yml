@@ -7,9 +7,9 @@ spec:
   ports:
   - port: 80
     name: http
-    targetPort: 3600
+    targetPort: 5000
   - port: 443
     name: https
-    targetPort: 3600
+    targetPort: 5000
   selector:
     app: barfoo
