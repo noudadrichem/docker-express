@@ -9,7 +9,10 @@ app.get('/', (_, res) => {
   console.log('GET / ')
   res.status(200).json({
     message: 'Hello Actions',
-    os: os.hostname
+    hostname: os.hostname(),
+    platform: os.platform(),
+    networkInterfaces: os.networkInterfaces(),
+    port,
   })
 })
 app.listen(port, () => console.log(`Running on port ${port}`))
