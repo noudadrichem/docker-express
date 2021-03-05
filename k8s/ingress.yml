@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name:  barfoo-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+      - testtesttesting.com
+      secretName: bw-certificate-2018
+  rules:
+  - host: testtesttesting.com
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: barfoo-svc
+          servicePort: 3600
