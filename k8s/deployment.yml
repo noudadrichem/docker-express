@@ -1,37 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: barfoo-deployment
+  name: docker-express-dpl
+  labels:
+    app: docker-express
 spec:
+  replicas: 3
   selector:
     matchLabels:
-      app: barfoo
-      tier: frontend
-      product: training
-  replicas: 1
+      app: docker-express
   template:
     metadata:
       labels:
-        app: barfoo
-        tier: frontend
-        product: training
+        app: docker-express
     spec:
       containers:
-      - name: docker-express
-        image: noudadrichem/docker-express
-        resources:
-          requests:
-            cpu: 100m
-            memory: 200Mi
-          limits:
-            memory: 250Mi
-            cpu: 150m
-        ports:
-        - containerPort: 5000
-        env:
-        - name: NODE_ENV
-          valueFrom:
-            configMapKeyRef:
-              name: testing
-              key: NODE_ENV
-      restartPolicy: Always
+        - name: docker-express-ctr
+          image: noudadrichem/docker-express
+          ports:
+            - containerPort: 5000
+        
